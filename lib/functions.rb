@@ -88,6 +88,8 @@ end
 
 def all_topics
     puts
+    puts "Topics"
+    puts "=================="
     Topic.in_batches.each_record {|topic| puts "#{topic.name}: #{topic.quotes.count} quotes" }
     
     # put here quote_by_topic function
