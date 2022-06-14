@@ -58,7 +58,7 @@ end
 def quote_details(quote)
     puts
     puts "\"#{quote.message}\""
-    puts "By #{quote.author.name}" + (!quote.year.nil? ? " in #{quote.year}" : "")
+    puts "By #{quote.author.name}" + (!quote.year.nil? ? " in #{year_formatter(quote.year)}" : "")
     if !quote.source.nil? then puts "Source: #{quote.source}" end
     if !quote.url.nil? then puts "URL: #{quote.url}" end
     puts "The topic is #{quote.topic.name}"
@@ -93,4 +93,16 @@ def all_topics
     Topic.in_batches.each_record {|topic| puts "#{topic.name}: #{topic.quotes.count} quotes" }
     
     # put here quote_by_topic function
+end
+
+# takes an int, returns a string
+def year_formatter(year)
+    case
+    when year < 0
+        "#{-year} B.C."
+    when year < 1500
+        "#{year} A.D."
+    else
+        "#{year}"
+    end
 end
