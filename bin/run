@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby 
+require_relative '../config/environment'
+
+# binding.pry
+
+welcome()
+while true
+    main_prompt()
+end
