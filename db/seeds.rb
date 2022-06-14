@@ -27,3 +27,16 @@ democritus = Author.create(name: "Democritus")
 occassion = Quote.create(message: "Thrift and fasting are good: so too is extravagance on occasion: it is the mark of a good man to recognize the occasion", author: democritus, topic: compromise, year: -400)
 restraint = Topic.create(name: "Restraint")
 overindulgence = Quote.create(message: "If you exceed the measure, what is most enjoyable becomes least enjoyable.", author: democritus, topic: restraint, year: -400)
+
+seneca = Author.create(name: "Seneca")
+stoicism = Topic.create(name: "Stoicism")
+duty = Quote.create(message: "The duty of a man is to be useful to his fellow-men; if possible, to be useful to many of them; failing this, to be useful to a few; failing this, to be useful to his neighbours, and, failing them, to himself: for when he helps others, he advances the general interests of mankind. Just as he who makes himself a worse man does harm not only to himself but to all those to whom he might have done good if he had made himself a better one, so he who deserves well of himself does good to others by the very fact that he is preparing what will be of service to them.", author: seneca, topic: stoicism, source: "On Leisure", year: 62)
+
+plato = Author.create(name: "Plato")
+justice = Topic.create(name: "Justice")
+appearance = Quote.create(message: "Can I by justice or by crooked ways of deceit ascend a loftier tower which may he a
+fortress to me all my days? For what men say is that, if I am really just and am not
+also thought just profit there is none, but the pain and loss on the other hand are
+unmistakable. But if, though unjust, I acquire the reputation of justice, a heavenly
+life is promised to me. Since then, as philosophers prove, appearance tyrannizes
+over truth and is lord of happiness, to appearance I must devote myself.", author: plato, topic: justice, source: "The Republic: Book II", year: -380)
