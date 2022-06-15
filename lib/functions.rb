@@ -131,3 +131,24 @@ def new_quote
     end
 
 end
+
+def delete_a_quote
+    puts
+    puts "Here are the quotes in the database. Take note of the ID of the quote you would like to delete."
+    Quote.all.in_batches.each_record { |quote| simple_quote_display(quote, true) }
+
+    puts
+    puts "Enter the ID of the quote you would like to delete, or press Enter to cancel:"
+    input = gets.chomp
+
+    if input == "" then
+        return
+    elsif Quote.ids.include?(input.to_i) then
+        Quote.find(input.to_i).destroy
+        puts "Quote #{input} has been deleted."
+    else
+        puts "#{input} is not a valid quote ID."
+    end
+
+    sleep(1)
+end

@@ -17,7 +17,8 @@ def main_prompt
         1 => "Add a new quote",
         2 => "See all quotes",
         3 => "See all topics",
-        4 => "See all authors"
+        4 => "See all authors",
+        5 => "Delete a quote"
     }
     
     # Prompt user for input and displays options
@@ -44,6 +45,8 @@ def main_prompt
         all_topics()
     when "4"
         all_authors()
+    when "5"
+        delete_a_quote()
     else
         puts
         puts "I didn't recognize that command. Please try again."

@@ -14,10 +14,11 @@ end
 
 # Puts a newline, the quote, and the author
 # Takes a quote object
-def simple_quote_display(quote)
+def simple_quote_display(quote, show_id=false)
     puts
     puts "\"#{quote.message}\""
     puts "- #{quote.author.name}"
+    if show_id then puts "Quote ID: #{quote.id}" end
 end
 
 # Prompts the user to press a key to continue
