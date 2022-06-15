@@ -18,7 +18,8 @@ def main_prompt
         2 => "See all quotes",
         3 => "See all topics",
         4 => "See all authors",
-        5 => "Delete a quote"
+        5 => "Delete a quote",
+        6 => "Clean database of quoteless authors & topics"
     }
     
     # Prompt user for input and displays options
@@ -47,6 +48,8 @@ def main_prompt
         all_authors()
     when "5"
         delete_a_quote()
+    when "6"
+        remove_quoteless()
     else
         puts
         puts "I didn't recognize that command. Please try again."

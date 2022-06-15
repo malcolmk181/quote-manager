@@ -41,7 +41,7 @@ def all_models(model)
     puts
     puts "#{model_name}s"
     puts "=================="
-    model.all.order(name: :asc).each{|itm| puts "#{itm.name}: #{itm.quotes.count} quotes" }
+    model.all.order(name: :asc).each{|itm| puts "#{itm.name}: #{itm.quotes.count} quote#{itm.quotes.count == 1 ? "" : "s"}" }
 
     puts
     puts "Enter the name of a #{model_name.downcase} to see their quotes. Otherwise, press Enter to return to the main menu."
@@ -65,7 +65,7 @@ def all_models(model)
         puts "I didn't find that #{model_name.downcase}."
     end
 
-    sleep(1)
+    click_to_continue()
 end
 
 # Prompts the user for quote details and adds quote
@@ -156,6 +156,18 @@ def delete_a_quote
     else
         puts "#{input} is not a valid quote ID."
     end
+
+    sleep(1)
+end
+
+def remove_quoteless
+    removed_topics = 0
+    removed_authors = 0
+    Topic.in_batches.each_record {|topic| if topic.quotes.count == 0 then topic.destroy ; removed_topics += 1 end }
+    Author.in_batches.each_record {|author| if author.quotes.count == 0 then author.destroy ; removed_authors += 1 end }
+
+    puts
+    puts "Removed #{removed_topics} topic#{removed_topics == 1 ? "" : "s"} and #{removed_authors} author#{removed_authors == 1 ? "" : "s"}."
 
     sleep(1)
 end
