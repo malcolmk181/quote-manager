@@ -34,9 +34,4 @@ duty = Quote.create(message: "The duty of a man is to be useful to his fellow-me
 
 plato = Author.create(name: "Plato")
 justice = Topic.create(name: "Justice")
-appearance = Quote.create(message: "Can I by justice or by crooked ways of deceit ascend a loftier tower which may he a
-fortress to me all my days? For what men say is that, if I am really just and am not
-also thought just profit there is none, but the pain and loss on the other hand are
-unmistakable. But if, though unjust, I acquire the reputation of justice, a heavenly
-life is promised to me. Since then, as philosophers prove, appearance tyrannizes
-over truth and is lord of happiness, to appearance I must devote myself.", author: plato, topic: justice, source: "The Republic: Book II", year: -380)
+appearance = Quote.create(message: "Can I by justice or by crooked ways of deceit ascend a loftier tower which may he a fortress to me all my days? For what men say is that, if I am really just and am not also thought just profit there is none, but the pain and loss on the other hand are unmistakable. But if, though unjust, I acquire the reputation of justice, a heavenly life is promised to me. Since then, as philosophers prove, appearance tyrannizes over truth and is lord of happiness, to appearance I must devote myself.", author: plato, topic: justice, source: "The Republic: Book II", year: -380)
