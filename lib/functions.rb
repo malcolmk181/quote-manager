@@ -33,6 +33,8 @@ def main_prompt
         all_quotes()
     when "3"
         all_topics()
+    when "4"
+        puts "to be implemented"
     else
         puts
         puts "I didn't recognize that command. Please try again."
@@ -78,9 +80,7 @@ end
 
 def all_quotes
     Quote.in_batches.each_record do |quote|
-        puts
-        puts "\"#{quote.message}\""
-        puts "- #{quote.author.name}"
+        simple_quote_display(quote)
     end
 
     click_to_continue()
@@ -91,8 +91,25 @@ def all_topics
     puts "Topics"
     puts "=================="
     Topic.in_batches.each_record {|topic| puts "#{topic.name}: #{topic.quotes.count} quotes" }
-    
+
     # put here quote_by_topic function
+    puts
+    puts "Enter the name of a topic to see its quotes. Otherwise, press Enter to return to the main menu."
+    input = gets.chomp
+    if input == "" then return end
+
+    topic_names = Topic.all.map{ |topic| topic.name }
+
+    if topic_names.include?(input) then
+        topic = Topic.find_by(name: input)
+        topic.quotes.in_batches.each_record { |quote| simple_quote_display(quote) }
+    else
+        puts
+        puts "I didn't find that topic."
+    end
+
+    sleep(1)
+
 end
 
 # takes an int, returns a string
@@ -105,4 +122,10 @@ def year_formatter(year)
     else
         "#{year}"
     end
+end
+
+def simple_quote_display(quote)
+    puts
+    puts "\"#{quote.message}\""
+    puts "- #{quote.author.name}"
 end
