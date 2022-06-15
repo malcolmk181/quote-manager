@@ -65,6 +65,11 @@ end
 # Prompts the user for quote details and adds quote
 # to database (or cancels)
 def new_quote
+    # Room for improvement
+        # should check that the message, author, and topic are not empty
+            # and not accept input until this is true
+        # a lot of repetitive code in here
+
     quote = Quote.new
     
     # Get message
@@ -123,7 +128,6 @@ def new_quote
     input = gets.chomp.downcase
 
     if input == "confirm" then
-        quote.author.save
         quote.save
     end
 
