@@ -48,8 +48,7 @@ def all_models(model)
     input = gets.chomp
     if input == "" then return end
 
-    names = model.all.map(&:name)
-    # might be able to change to model.pluck(:name)
+    names = model.pluck(:name)
 
     if names.include?(input) then
         itm = model.find_by(name: input)
