@@ -7,7 +7,7 @@ def quote_details(quote)
     if !quote.source.nil? then puts "Source: #{quote.source}" end
     if !quote.url.nil? then puts "URL: #{quote.url}" end
     puts "The topic is #{quote.topic.name}"
-    puts "This quote was added to the database on #{quote.created_at.strftime('%m/%d/%Y')}"
+    if !quote.created_at.nil? then puts "This quote was added to the database on #{quote.created_at.strftime('%m/%d/%Y')}" end
 
     click_to_continue()
 end

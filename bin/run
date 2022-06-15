@@ -37,7 +37,7 @@ def main_prompt
     when "0"
         random_quote()
     when "1"
-        puts "to be implemented"
+        new_quote()
     when "2"
         all_quotes()
     when "3"
