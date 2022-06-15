@@ -25,7 +25,7 @@ Upon running, the main menu looks like this:
 ```
 Welcome to Quote Manager!
 - - - - - - - - - - - - -
-You have 0 quotes, by 0 authors, in 0 topics.
+You have 7 quotes, by 6 authors, in 6 topics.
 
 What would you like to do?
 Enter one of the following numbers, or X to quit.
@@ -34,6 +34,8 @@ Enter one of the following numbers, or X to quit.
 2: See all quotes
 3: See all topics
 4: See all authors
+5: Delete a quote
+6: Clean database of quoteless authors & topics
 ```
 The rest of the app is similar - you navigate through the app by typing in the command line, and typing in a choice to a list of options.
 
@@ -45,7 +47,7 @@ The rest of the app is similar - you navigate through the app by typing in the c
 2. As a user, I want to be able to choose an author to see their quotes. ✅
 3. As a user, I want to be able to choose a topic to see its quotes. ✅
 4. As a user, I want to be able to request to view a random quote. ✅
-5. As a user, I should be able to update or delete a quote and its properties.
+5. As a user, I should be able to delete a quote and its properties. ✅
 
 ### Database Structure
 There are three models: quotes, authors, and topics
