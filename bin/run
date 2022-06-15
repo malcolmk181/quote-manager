@@ -13,13 +13,13 @@ end
 # The main menu
 def main_prompt
     options = {
-        0 => "View a random quote",
-        1 => "Add a new quote",
-        2 => "See all quotes",
-        3 => "See all topics",
-        4 => "See all authors",
-        5 => "Delete a quote",
-        6 => "Clean database of quoteless authors & topics"
+        0 => ["View a random quote", method(:random_quote)],
+        1 => ["Add a new quote", method(:new_quote)],
+        2 => ["See all quotes", method(:all_quotes)],
+        3 => ["See all topics", method(:all_topics)],
+        4 => ["See all authors", method(:all_authors)],
+        5 => ["Delete a quote", method(:delete_a_quote)],
+        6 => ["Clean database of quoteless authors & topics", method(:remove_quoteless)]
     }
     
     # Prompt user for input and displays options
@@ -27,29 +27,19 @@ def main_prompt
     puts "What would you like to do?"
     puts "Enter one of the following numbers, or X to quit."
     for index, command in options do
-        puts "#{index}: #{command}"
+        puts "#{index}: #{command[0]}"
     end
 
     input = gets.chomp.downcase
 
     # Handle input
-    case input
-    when "x", "q", "quit"
+    case
+    when input == ""
+        return
+    when ["x", "q", "quit"].include?(input)
         exit
-    when "0"
-        random_quote()
-    when "1"
-        new_quote()
-    when "2"
-        all_quotes()
-    when "3"
-        all_topics()
-    when "4"
-        all_authors()
-    when "5"
-        delete_a_quote()
-    when "6"
-        remove_quoteless()
+    when (0...options.count).to_a.include?(input.to_i)
+        options[input.to_i][1].call
     else
         puts
         puts "I didn't recognize that command. Please try again."
