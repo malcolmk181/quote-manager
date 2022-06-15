@@ -96,53 +96,13 @@ end
 # Displays all topics
 # Allows for viewing quote by topic
 def all_topics
-    puts
-    puts "Topics"
-    puts "=================="
-    Topic.all.order(name: :asc).each{|topic| puts "#{topic.name}: #{topic.quotes.count} quotes" }
-
-    puts
-    puts "Enter the name of a topic to see its quotes. Otherwise, press Enter to return to the main menu."
-    input = gets.chomp
-    if input == "" then return end
-
-    names = Topic.all.map(&:name)
-
-    if names.include?(input) then
-        topic = Topic.find_by(name: input)
-        topic.quotes.in_batches.each_record { |quote| simple_quote_display(quote) }
-    else
-        puts
-        puts "I didn't find that topic."
-    end
-
-    sleep(1)
-
+    all_models(Topic)
 end
 
 # Displays all authors
+# Allows for viewing quote by author
 def all_authors
-    puts
-    puts "Authors"
-    puts "=================="
-    Author.all.order(name: :asc).each{|author| puts "#{author.name}: #{author.quotes.count} quotes" }
-
-    puts
-    puts "Enter the name of an author to see their quotes. Otherwise, press Enter to return to the main menu."
-    input = gets.chomp
-    if input == "" then return end
-
-    names = Author.all.map(&:name)
-
-    if names.include?(input) then
-        author = Author.find_by(name: input)
-        author.quotes.in_batches.each_record { |quote| simple_quote_display(quote) }
-    else
-        puts
-        puts "I didn't find that author."
-    end
-
-    sleep(1)
+    all_models(Author)
 end
 
 # Formats a year to add AD or BC if relevant
@@ -164,4 +124,33 @@ def simple_quote_display(quote)
     puts
     puts "\"#{quote.message}\""
     puts "- #{quote.author.name}"
+end
+
+# Given a class, model, outputs that model's instances
+# and prompts to output their quotes as well
+# Expects the Author or Topic class as input
+def all_models(model)
+    model_name = model.name
+
+    puts
+    puts "#{model_name}s"
+    puts "=================="
+    model.all.order(name: :asc).each{|itm| puts "#{itm.name}: #{itm.quotes.count} quotes" }
+
+    puts
+    puts "Enter the name of a #{model_name.downcase} to see their quotes. Otherwise, press Enter to return to the main menu."
+    input = gets.chomp
+    if input == "" then return end
+
+    names = model.all.map(&:name)
+
+    if names.include?(input) then
+        itm = model.find_by(name: input)
+        itm.quotes.in_batches.each_record { |quote| simple_quote_display(quote) }
+    else
+        puts
+        puts "I didn't find that #{model_name.downcase}."
+    end
+
+    sleep(1)
 end
