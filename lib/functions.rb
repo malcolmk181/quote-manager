@@ -1,9 +1,11 @@
+# A welcome message called before the main menu loop
 def welcome
     puts "Welcome to Quote Manager!"
     puts "- - - - - - - - - - - - -"
     puts "You have #{Quote.all.count} quotes, by #{Author.all.count} authors, in #{Topic.all.count} topics."
 end
 
+# The main menu
 def main_prompt
     options = {
         0 => "View a random quote",
@@ -13,6 +15,7 @@ def main_prompt
         4 => "See all authors"
     }
     
+    # Prompt user for input and displays options
     puts
     puts "What would you like to do?"
     puts "Enter one of the following numbers, or X to quit."
@@ -22,9 +25,10 @@ def main_prompt
 
     input = gets.chomp.downcase
 
-    if ["x", "q", "quit"].include?(input) then exit end
-
+    # Handle input
     case input
+    when "x", "q", "quit"
+        exit
     when "0"
         random_quote()
     when "1"
@@ -43,7 +47,7 @@ def main_prompt
 
 end
 
-# displays a random quote and prompts the user if they want to know more about it
+# Displays a random quote and prompts the user if they want to know more about it
 def random_quote
     quote = Quote.all.sample
     puts
@@ -56,7 +60,8 @@ def random_quote
     if ["y","yes"].include?(input) then quote_details(quote) end
 end
 
-# displays more detail about a quote
+# Displays more detail about a quote
+# Takes a quote object
 def quote_details(quote)
     puts
     puts "\"#{quote.message}\""
@@ -69,6 +74,7 @@ def quote_details(quote)
     click_to_continue()
 end
 
+# Prompts the user to press a key to continue
 # this 'click key to continue' function taken from
 # https://stackoverflow.com/questions/34594018/how-to-code-press-key-to-continue                                                                            
 def click_to_continue
@@ -78,6 +84,7 @@ def click_to_continue
     print "            \r" # extra space to overwrite in case next sentence is short
 end
 
+# Displays all quotes
 def all_quotes
     Quote.in_batches.each_record do |quote|
         simple_quote_display(quote)
@@ -86,13 +93,14 @@ def all_quotes
     click_to_continue()
 end
 
+# Displays all topics
+# Allows for viewing quote by topic
 def all_topics
     puts
     puts "Topics"
     puts "=================="
     Topic.in_batches.each_record {|topic| puts "#{topic.name}: #{topic.quotes.count} quotes" }
 
-    # put here quote_by_topic function
     puts
     puts "Enter the name of a topic to see its quotes. Otherwise, press Enter to return to the main menu."
     input = gets.chomp
@@ -112,7 +120,8 @@ def all_topics
 
 end
 
-# takes an int, returns a string
+# Formats a year to add AD or BC if relevant
+# Takes an int, returns a string
 def year_formatter(year)
     case
     when year < 0
@@ -124,6 +133,8 @@ def year_formatter(year)
     end
 end
 
+# Puts a newline, the quote, and the author
+# Takes a quote object
 def simple_quote_display(quote)
     puts
     puts "\"#{quote.message}\""
