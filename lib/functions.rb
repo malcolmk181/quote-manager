@@ -52,7 +52,14 @@ def all_models(model)
 
     if names.include?(input) then
         itm = model.find_by(name: input)
-        itm.quotes.in_batches.each_record { |quote| simple_quote_display(quote) }
+
+        if itm.quotes.count == 0 then
+            puts
+            puts "#{itm.name} has no quotes."
+            puts "To stop displaying this #{model_name.downcase}, use the clean option at the main menu."
+        else
+            itm.quotes.in_batches.each_record { |quote| simple_quote_display(quote) }
+        end
     else
         puts
         puts "I didn't find that #{model_name.downcase}."
