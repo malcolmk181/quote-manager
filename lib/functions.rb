@@ -38,7 +38,7 @@ def main_prompt
     when "3"
         all_topics()
     when "4"
-        puts "to be implemented"
+        all_authors()
     else
         puts
         puts "I didn't recognize that command. Please try again."
@@ -99,16 +99,16 @@ def all_topics
     puts
     puts "Topics"
     puts "=================="
-    Topic.in_batches.each_record {|topic| puts "#{topic.name}: #{topic.quotes.count} quotes" }
+    Topic.all.order(name: :asc).each{|topic| puts "#{topic.name}: #{topic.quotes.count} quotes" }
 
     puts
     puts "Enter the name of a topic to see its quotes. Otherwise, press Enter to return to the main menu."
     input = gets.chomp
     if input == "" then return end
 
-    topic_names = Topic.all.map{ |topic| topic.name }
+    names = Topic.all.map(&:name)
 
-    if topic_names.include?(input) then
+    if names.include?(input) then
         topic = Topic.find_by(name: input)
         topic.quotes.in_batches.each_record { |quote| simple_quote_display(quote) }
     else
@@ -118,6 +118,31 @@ def all_topics
 
     sleep(1)
 
+end
+
+# Displays all authors
+def all_authors
+    puts
+    puts "Authors"
+    puts "=================="
+    Author.all.order(name: :asc).each{|author| puts "#{author.name}: #{author.quotes.count} quotes" }
+
+    puts
+    puts "Enter the name of an author to see their quotes. Otherwise, press Enter to return to the main menu."
+    input = gets.chomp
+    if input == "" then return end
+
+    names = Author.all.map(&:name)
+
+    if names.include?(input) then
+        author = Author.find_by(name: input)
+        author.quotes.in_batches.each_record { |quote| simple_quote_display(quote) }
+    else
+        puts
+        puts "I didn't find that author."
+    end
+
+    sleep(1)
 end
 
 # Formats a year to add AD or BC if relevant
