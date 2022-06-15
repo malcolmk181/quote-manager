@@ -1,10 +1,10 @@
 require "bundler/setup"
 require "sinatra/activerecord"
 require "io/console"
-require_relative '../lib/functions.rb'
 
 Bundler.require
 require_all 'app/models'
+require_all 'lib'
 
 ENV['SINATRA_ENV'] ||= 'development'
 
