@@ -2,8 +2,8 @@
 # Takes a quote object
 def quote_details(quote)
     puts
-    puts "\"#{quote.message}\""
-    puts "By #{quote.author.name}" + (!quote.year.nil? ? " in #{year_formatter(quote.year)}" : "")
+    puts "\"#{quote.message}\"".italic
+    puts "- #{quote.author.name}" + (!quote.year.nil? ? ", #{year_formatter(quote.year)}" : "")
     if !quote.source.nil? then puts "Source: #{quote.source}" end
     if !quote.url.nil? then puts "URL: #{quote.url}" end
     puts "The topic is #{quote.topic.name}"
@@ -16,7 +16,7 @@ end
 # Takes a quote object
 def simple_quote_display(quote, show_id=false)
     puts
-    puts "\"#{quote.message}\""
+    puts "\"#{quote.message}\"".italic
     puts "- #{quote.author.name}"
     if show_id then puts "Quote ID: #{quote.id}" end
 end
@@ -26,7 +26,7 @@ end
 # https://stackoverflow.com/questions/34594018/how-to-code-press-key-to-continue                                                                            
 def click_to_continue
     puts
-    puts "Press any key to continue"
+    puts "Press any key to continue".cyan
     STDIN.getch
     print "            \r" # extra space to overwrite in case next sentence is short
 end

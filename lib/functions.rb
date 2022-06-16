@@ -2,11 +2,11 @@
 def random_quote
     quote = Quote.all.sample
     puts
-    puts "Here's a quote from #{quote.author.name}"
-    puts "\"#{quote.message}\""
+    puts "Here's a quote from #{quote.author.name}:"
+    puts "\"#{quote.message}\"".italic
     
     puts
-    puts "Would you like to learn more about this quote? (y/n)"
+    puts "Would you like to learn more about this quote? (y/n)".cyan
     input = gets.chomp.downcase
     if ["y","yes"].include?(input) then quote_details(quote) end
 end
@@ -39,12 +39,12 @@ def all_models(model)
     model_name = model.name
 
     puts
-    puts "#{model_name}s"
+    puts "#{model_name}s".bold
     puts "=================="
-    model.all.order(name: :asc).each{|itm| puts "#{itm.name}: #{itm.quotes.count} quote#{itm.quotes.count == 1 ? "" : "s"}" }
+    model.all.order(name: :asc).each{|itm| puts "#{itm.name.yellow}: #{itm.quotes.count} quote#{itm.quotes.count == 1 ? "" : "s"}" }
 
     puts
-    puts "Enter the name of a #{model_name.downcase} to see their quotes. Otherwise, press Enter to return to the main menu."
+    puts "Enter the name of a#{["a","e","i","o","u"].include?(model_name.downcase[0]) ? "n" : ""} #{model_name.downcase} to see #{model_name.downcase == "author" ? "their" : "its"} quotes. Otherwise, press Enter to return to the main menu.".cyan
     input = gets.chomp
     if input == "" then return end
 
@@ -80,12 +80,12 @@ def new_quote
     
     # Get message
     puts
-    puts "Enter the content of your quote:"
+    puts "Enter the content of your quote:".cyan
     message = gets.chomp
     quote.message = message
 
     # Get author
-    puts "Enter the author of your quote:"
+    puts "Enter the author of your quote:".cyan
     author = gets.chomp
 
     author_lookup = Author.where("name LIKE ?", author)
@@ -96,7 +96,7 @@ def new_quote
     end
 
     # Get topic
-    puts "Enter the topic of your quote:"
+    puts "Enter the topic of your quote:".cyan
     topic = gets.chomp
 
     topic_lookup = Topic.where("name LIKE ?", topic)
@@ -107,21 +107,21 @@ def new_quote
     end
 
     # Get source
-    puts "Enter the source of the quote (not the URL - but whatever body of work or instance this came from), or press Enter to skip:"
+    puts "Enter the source of the quote (not the URL - but whatever body of work or instance this came from), or press Enter to skip:".cyan
     source = gets.chomp
     if source != "" then
         quote.source = source
     end
 
     # Get year
-    puts "Enter the year of your quote, or press Enter to skip (If the year is in B.C., add a - before the year):"
+    puts "Enter the year of your quote, or press Enter to skip (If the year is in B.C., add a - before the year):".cyan
     year = gets.chomp
     if year != "" then
         quote.year = year.to_i
     end
 
     # Get URL
-    puts "Enter the URL of your quote, or press Enter to skip:"
+    puts "Enter the URL of your quote, or press Enter to skip:".cyan
     url = gets.chomp
     if url != "" then
         quote.url = url
@@ -130,7 +130,7 @@ def new_quote
     quote_details(quote)
 
     puts
-    puts "If this looks right, type confirm to add to the database, or cancel to cancel:"
+    puts "If this looks right, type confirm to add to the database, or cancel to cancel:".cyan
     input = gets.chomp.downcase
 
     if input == "confirm" then
@@ -139,13 +139,15 @@ def new_quote
 
 end
 
+# Prints out all quotes and their IDs
+# Prompts for the ID of a quote to delete
 def delete_a_quote
     puts
     puts "Here are the quotes in the database. Take note of the ID of the quote you would like to delete."
     Quote.all.in_batches.each_record { |quote| simple_quote_display(quote, true) }
 
     puts
-    puts "Enter the ID of the quote you would like to delete, or press Enter to cancel:"
+    puts "Enter the ID of the quote you would like to delete, or press Enter to cancel:".cyan
     input = gets.chomp
 
     if input == "" then
@@ -160,6 +162,8 @@ def delete_a_quote
     sleep(1)
 end
 
+# Removes any topics or authors from the database that have no
+# quotes that belong to them
 def remove_quoteless
     removed_topics = 0
     removed_authors = 0
