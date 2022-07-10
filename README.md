@@ -56,5 +56,5 @@ There are four models: quotes, authors, topics, and quote_topics
 - An author has many topics through quotes. A topic has many authors through quotes.
 - Quote_topics is a join table for quotes and topics.
 
-![Project 1 DB Model](https://user-images.githubusercontent.com/78397791/173448956-414fa3d9-86da-41f2-92c0-8ae8e63d0351.png)
-*Database model illustration from [dbdiagram.io](https://dbdiagram.io/d/62a7a9fa9921fe2a96f8f364 "This model diagram")*
+![Project 1 DB Model](https://user-images.githubusercontent.com/78397791/178157480-713d146a-a6bb-4826-ba9f-4d7ad5be5126.png)
+*Database model illustration from [dbdiagram.io](https://dbdiagram.io/d/62cb1a02cc1bc14cc58d0192 "This model diagram")*
