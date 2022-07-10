@@ -50,10 +50,11 @@ The rest of the app is similar - you navigate through the app by typing in the c
 5. As a user, I should be able to delete a quote and its properties. ✅
 
 ### Database Structure
-There are three models: quotes, authors, and topics
+There are four models: quotes, authors, topics, and quote_topics
 - A quote belongs to an author. An author has many quotes.
-- A quote belongs to a topic. A topic has many quotes.
+- A quote has many topics. A topic has many quotes.
 - An author has many topics through quotes. A topic has many authors through quotes.
+- Quote_topics is a join table for quotes and topics.
 
 ![Project 1 DB Model](https://user-images.githubusercontent.com/78397791/173448956-414fa3d9-86da-41f2-92c0-8ae8e63d0351.png)
 *Database model illustration from [dbdiagram.io](https://dbdiagram.io/d/62a7a9fa9921fe2a96f8f364 "This model diagram")*
