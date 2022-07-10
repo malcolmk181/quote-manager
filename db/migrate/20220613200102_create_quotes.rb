@@ -5,8 +5,8 @@ class CreateQuotes < ActiveRecord::Migration[6.0]
       t.integer :year
       t.string :url
 
-      t.integer :author_id
-      t.integer :topic_id
+      t.references :author
+      t.references :topic
 
       t.timestamps
     end
