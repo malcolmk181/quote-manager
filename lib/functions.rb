@@ -96,15 +96,18 @@ def new_quote
     end
 
     # Get topic
-    puts "Enter the topic of your quote:".cyan
-    topic = gets.chomp
+    puts "Enter the topic(s) of your quote - separate topics with commas:".cyan
+    topics = gets.chomp.split(",").map(&:strip)
 
-    topic_lookup = Topic.where("name LIKE ?", topic)
-    if topic_lookup.count > 0 then
-        quote.topic = topic_lookup[0]
-    else
-        quote.topic = Topic.new(name: topic)
+    topics.each do |topic|
+        topic_lookup = Topic.where("name LIKE ?", topic)
+        if topic_lookup.count > 0 then
+            quote.topics << topic_lookup[0]
+        else
+            quote.topics << Topic.new(name: topic)
+        end
     end
+    
 
     # Get source
     puts "Enter the source of the quote (not the URL - but whatever body of work or instance this came from), or press Enter to skip:".cyan
