@@ -4,6 +4,6 @@ class Quote < ActiveRecord::Base
     has_many :topics, through: :quote_topics
 
     def topic_names
-        topics.map(&:name)
+        topics.map(&:name).join(", ")
     end
 end
